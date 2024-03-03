@@ -11,7 +11,7 @@ defmodule RumblWeb.UserHTML do
 
   embed_templates "user_html/*"
 
-  attr :all, Accounts.User
+  attr :user, Accounts.User
   def user(assigns)
 
 end
