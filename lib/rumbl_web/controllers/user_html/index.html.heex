@@ -1,4 +1,11 @@
-<h1>Listing Users</h1>
+<.header>
+  Listing Users
+  <:actions>
+    <.link href={~p"/users/new"}>
+      <.button>New User</.button>
+    </.link>
+  </:actions>
+</.header>
 
 <.table id="users" rows={@users}>
   <:col :let={user} label="Name"><.user user={user} /></:col>
