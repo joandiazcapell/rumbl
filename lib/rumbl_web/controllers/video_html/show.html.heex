@@ -2,7 +2,7 @@
   Video <%= @video.id %>
   <:subtitle>This is a video record from your database.</:subtitle>
   <:actions>
-    <.link href={~p"/videos/#{@video}/edit"}>
+    <.link href={~p"/manage/videos/#{@video}/edit"}>
       <.button>Edit video</.button>
     </.link>
   </:actions>
@@ -14,4 +14,4 @@
   <:item title="Description"><%= @video.description %></:item>
 </.list>
 
-<.back navigate={~p"/videos"}>Back to videos</.back>
+<.back navigate={~p"/manage/videos"}>Back to videos</.back>
