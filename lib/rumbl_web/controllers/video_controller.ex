@@ -3,6 +3,7 @@ defmodule RumblWeb.VideoController do
 
   alias Rumbl.Multimedia
   alias Rumbl.Multimedia.Video
+  plug :authenticate_user
 
   #Add the current_user from the assign to all the funtions of the controller
   def action(conn, _) do
