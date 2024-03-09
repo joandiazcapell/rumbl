@@ -20,4 +20,10 @@ defmodule RumblWeb.SessionController do
     end
   end
 
+  def delete(conn, params) do
+    conn
+    |> RumblWeb.Plugs.Auth.logout()
+    |> redirect(to: ~p"/")
+  end
+
 end
