@@ -8,6 +8,7 @@ defmodule RumblWeb.Router do
     plug :put_root_layout, html: {RumblWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug RumblWeb.Plugs.Auth
   end
 
   pipeline :api do
@@ -19,8 +20,9 @@ defmodule RumblWeb.Router do
 
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
-    resources "/users", UserController, only: [:index, :show, :new, :create]
     get "/", PageController, :home
+    resources "/users", UserController, only: [:index, :show, :new, :create]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.
