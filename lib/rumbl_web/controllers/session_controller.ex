@@ -6,10 +6,6 @@ defmodule RumblWeb.SessionController do
   end
 
   def create(conn, %{"session" => %{"username" => username, "password" => password}}) do
-    IO.puts("+++")
-    IO.inspect(conn)
-    IO.puts("+++")
-    IO.inspect(username)
     case Rumbl.Accounts.authenticate_by_username_and_password(username, password) do
       {:ok, user} ->
         conn
