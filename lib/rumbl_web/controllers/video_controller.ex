@@ -20,7 +20,6 @@ defmodule RumblWeb.VideoController do
   def new(conn, _params, _current_user) do
     changeset = Multimedia.change_video(%Video{})
     render(conn, :new, changeset: changeset)
-    #render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"video" => video_params}, current_user) do
