@@ -21,6 +21,9 @@ defmodule Rumbl.MultimediaTest do
   describe "videos" do
     alias Rumbl.Multimedia.Video
 
+    import Rumbl.MultimediaFixtures
+    import Rumbl.AccountFixtures
+
     @valid_attrs %{description: "desc", title: "title", url: "http://local"}
     @invalid_attrs %{description: nil, title: nil, url: nil}
 

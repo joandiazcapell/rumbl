@@ -52,6 +52,8 @@ defmodule Rumbl.AccountsTest do
 end
 
   describe "authenticate_by_username_and_password/2" do
+    import Rumbl.AccountFixtures
+
     @pass "123456"
 
     setup do
