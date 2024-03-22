@@ -32,8 +32,7 @@ defmodule RumblWeb.VideoControllerTestuse do
 
     @tag login_as: "fulanito"
     test "creates user video and redirects", %{conn: conn, user: user} do
-      category_id = Multimedia.get_by_a_Category!("Drama").id
-      new_attrs = Map.put(@create_attrs, :category_id, category_id)
+      new_attrs = Map.put(@create_attrs, :category_id, Multimedia.get_by_a_Category!("Drama").id)
 
       creates_conn = post(conn, ~p"/manage/videos/", video: new_attrs)
 
