@@ -10,11 +10,13 @@ defmodule Rumbl.MultimediaFixtures do
   Generate a video.
   """
   def video_fixture(%Accounts.User{} = user, attrs \\ %{}) do
+    category_id = Multimedia.get_by_a_Category!("Drama").id
     attrs =
       Enum.into(attrs, %{
         title: "A Title",
         url: "http://example.com",
-        description: "a description"
+        description: "a description",
+        category_id: category_id
       })
 
     {:ok, video} = Multimedia.create_video(user, attrs)

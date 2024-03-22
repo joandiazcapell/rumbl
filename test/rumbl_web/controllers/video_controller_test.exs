@@ -32,14 +32,16 @@ defmodule RumblWeb.VideoControllerTestuse do
 
     @tag login_as: "fulanito"
     test "creates user video and redirects", %{conn: conn, user: user} do
-      creates_conn = post(conn, ~p"/manage/videos/", video: @create_attrs)
+      category_id = Multimedia.get_by_a_Category!("Drama").id
+      new_attrs = Map.put(@create_attrs, :category_id, category_id)
+
+      creates_conn = post(conn, ~p"/manage/videos/", video: new_attrs)
 
       assert %{id: id} = redirected_params(creates_conn)
       assert redirected_to(creates_conn) == ~p"/manage/videos/#{id}"
 
-      #TODO: Add cateogiries on the test otherwise the show render get an error
-      #conn = get(conn, ~p"/manage/videos/#{id}")
-      #assert html_response(conn, 200) =~ "Video #{id}"
+      conn = get(conn, ~p"/manage/videos/#{id}")
+      assert html_response(conn, 200) =~ "Video #{id}"
 
       assert Multimedia.get_video!(id).user_id == user.id
     end

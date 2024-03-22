@@ -132,4 +132,10 @@ defmodule Rumbl.Multimedia do
     |> Repo.all()
   end
 
+  def get_by_a_Category!(name) do
+    Category
+    |> Repo.get_by!(name: name)
+
+  end
+
 end
