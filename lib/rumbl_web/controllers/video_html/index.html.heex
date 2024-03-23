@@ -16,6 +16,7 @@
       <.link navigate={~p"/manage/videos/#{video}"}>Show</.link>
     </div>
     <.link navigate={~p"/manage/videos/#{video}/edit"}>Edit</.link>
+    <.link navigate={~p"/watch/#{video}"}>Watch</.link>
   </:action>
   <:action :let={video}>
     <.link href={~p"/manage/videos/#{video}"} method="delete" data-confirm="Are you sure?">

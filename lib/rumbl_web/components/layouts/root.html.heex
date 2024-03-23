@@ -19,6 +19,13 @@
         </li>
         <li>
           <.link 
+            href={~p"/manage/videos"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700">
+            My Videos
+          </.link>
+        </li>
+        <li>
+          <.link 
             href={~p"/sessions/#{@current_user.id}"}
             method="delete"
             class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
