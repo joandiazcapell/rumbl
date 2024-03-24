@@ -1,6 +1,6 @@
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
-// import "./user_socket.js"
+import socket from "./user_socket.js"
 
 // You can include dependencies in two ways.
 //
@@ -21,14 +21,9 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
-import Player from "./player"
+import Video from "./video"
 
-let video = document.getElementById("video")
-if(video){
-  Player.init(video.id, video.getAttribute("data-player-id"), () => {
-    console.log("player ready!")
-  })
-}
+Video.init(socket, document.getElementById("video"))
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
