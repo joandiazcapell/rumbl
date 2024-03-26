@@ -3,7 +3,9 @@ defmodule RumblWeb.VideoChannel do
 
   @impl true
   def join("videos:" <> video_id, _payload, socket) do
-    {:ok, assign(socket, :video_id, String.to_integer(video_id))}
+    :timer.send_interval(5_000, :ping)
+    {:ok, socket}
+    #{:ok, assign(socket, :video_id, String.to_integer(video_id))}
     #if authorized?(payload) do
     #  {:ok, socket}
     #else
@@ -11,19 +13,24 @@ defmodule RumblWeb.VideoChannel do
     #end
   end
 
-  # Channels can be used in a request/response fashion
-  # by sending replies to requests from the client
-  @impl true
-  def handle_in("ping", payload, socket) do
-    {:reply, {:ok, payload}, socket}
-  end
+  #@impl true
+  #def handle_info(:ping, socket) do
+  #  count = socket.assigns[:count] || 1
+  #  push(socket, "ping", %{count: count})
 
-  # It is also common to receive messages from the client and
-  # broadcast to everyone in the current topic (video:lobby).
+  #  {:noreply, assign(socket, :count, count + 1)}
+  #end
+
+
   @impl true
-  def handle_in("shout", payload, socket) do
-    broadcast(socket, "shout", payload)
-    {:noreply, socket}
+  def handle_in("new_annotation", payload, socket) do
+    broadcast!(socket, "new_annotation", %{
+      user: %{username: "anon"},
+      body: payload["body"],
+      at: payload["at"]
+    })
+
+    {:reply, :ok, socket}
   end
 
   # Add authorization logic here as required.
