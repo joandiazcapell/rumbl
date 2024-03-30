@@ -13,6 +13,7 @@ defmodule RumblWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
   end
 
   scope "/", RumblWeb do
@@ -31,9 +32,11 @@ defmodule RumblWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", RumblWeb do
-  #   pipe_through :api
-  # end
+   scope "/api", RumblWeb do
+     pipe_through :api
+
+     resources "/users", UserController, only: [:index, :show]
+   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:rumbl, :dev_routes) do
