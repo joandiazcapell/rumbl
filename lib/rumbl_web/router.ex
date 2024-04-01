@@ -36,6 +36,8 @@ defmodule RumblWeb.Router do
      pipe_through :api
 
      resources "/users", UserController, only: [:index, :show]
+     #resources "/annotations", AnnotationController, only: [:index]
+     get "/annotations/:id", AnnotationController, :index
    end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

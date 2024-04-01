@@ -19,7 +19,8 @@ defmodule RumblWeb.AnnotationJSON do
     %{
       id: annotation.id,
       at: annotation.at,
-      body: annotation.body
+      body: annotation.body,
+      user: RumblWeb.UserJSON.show(%{user: annotation.user})
     }
   end
 end

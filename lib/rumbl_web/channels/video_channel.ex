@@ -1,19 +1,23 @@
 defmodule RumblWeb.VideoChannel do
+  use RumblWeb, :verified_routes
+  use RumblWeb, :channel
+
   alias Rumbl.Multimedia
   alias Rumbl.Accounts
-  use RumblWeb, :channel
 
   @impl true
   def join("videos:" <> video_id, _payload, socket) do
-    #video_id = String.to_integer(video_id)
-    #video = Multimedia.get_video!(video_id)
+    video_id = String.to_integer(video_id)
+    video = Multimedia.get_video!(video_id)
 
-    #annotations =
-    #  video
-    # |> Multimedia.list_anotations()
-    #  |> Phoenix.
+    annotations =
+      video
+      |> Multimedia.list_anotations()
 
-    {:ok, assign(socket, :video_id, String.to_integer(video_id))}
+    annotations_json = RumblWeb.AnnotationJSON.index(%{annotations: annotations})
+    #annotations = ~p"/api/annotations/#{video_id}"
+
+    {:ok, %{annotations: annotations_json}, assign(socket, :video_id, video_id)}
   end
 
   @impl true
@@ -27,7 +31,8 @@ defmodule RumblWeb.VideoChannel do
       {:ok, annotation} ->
         broadcast!(socket, "new_annotation", %{
           id: annotation.id,
-          user: RumblWeb.UserJSON.show(%{user: user}),
+          #user: RumblWeb.UserJSON.show(%{user: user}),
+          user: ~p"/api/users/#{user}",
           body: annotation.body,
           at: annotation.at
         })

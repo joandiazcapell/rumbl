@@ -6,10 +6,12 @@ defmodule RumblWeb.AnnotationController do
 
   action_fallback RumblWeb.FallbackController
 
-  #def index(conn, _params) do
-  #  annotations = Multimedia.list_annotations()
-  #  render(conn, :index, annotations: annotations)
-  #end
+  def index(conn, %{"id" => video_id}) do
+    annotations = Multimedia.get_video!(video_id)
+    |> Multimedia.list_anotations()
+
+    render(conn, :index, annotations: annotations)
+  end
 
   #def create(conn, %{"annotation" => annotation_params}) do
   #  with {:ok, %Annotation{} = annotation} <- Multimedia.create_annotation(annotation_params) do
